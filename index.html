@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyehehehe</title>
+    <style>
+        body {
+            background-color: #008080;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .window {
+            width: 400px;
+            background: #C0C0C0;
+            border: 2px solid black;
+            box-shadow: 4px 4px 0px black;
+            position: absolute;
+        }
+        .title-bar {
+            background: navy;
+            color: white;
+            padding: 5px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .title-bar span {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <audio id="closeSound" src="Sound/nyehehehe.mp3"></audio>
+    <script>
+        function closeWindow(element) {
+            let audio = document.getElementById('closeSound');
+            audio.currentTime = 0;
+            audio.play();
+            
+            let parentWindow = element.parentElement.parentElement;
+            parentWindow.remove();
+            setTimeout(() => {
+                spawnDuplicate();
+                spawnDuplicate();
+            }, 500);
+        }
+
+        function spawnDuplicate() {
+            let newWindow = document.createElement('div');
+            newWindow.className = 'window';
+            let maxWidth = window.innerWidth - 420;
+            let maxHeight = window.innerHeight - 220;
+            newWindow.style.top = Math.max(0, Math.random() * maxHeight) + 'px';
+            newWindow.style.left = Math.max(0, Math.random() * maxWidth) + 'px';
+            newWindow.innerHTML = `
+                <div class="title-bar">
+                    <span>Imagen</span>
+                    <button onclick="closeWindow(this)">X</button>
+                </div>
+                <div class="content">
+                    <img src="https://i.pinimg.com/236x/cf/c8/37/cfc83722ee06503416e1c4531709e54a.jpg" alt="Imagen retro">
+                </div>
+            `;
+            document.body.appendChild(newWindow);
+        }
+    </script>
+    <div class="window" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="title-bar">
+            <span>Nyehehehe</span>
+            <button onclick="closeWindow(this)">X</button>
+        </div>
+        <div class="content">
+            <img src="https://i.pinimg.com/236x/cf/c8/37/cfc83722ee06503416e1c4531709e54a.jpg" alt="Imagen retro">
+        </div>
+    </div>
+</body>
+</html>
